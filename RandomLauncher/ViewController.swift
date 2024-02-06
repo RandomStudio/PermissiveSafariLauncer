@@ -30,14 +30,15 @@ class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
         // Disables CORS, see related WDBSetWebSecurityEnabled.h file for implementation
         WDBSetWebSecurityEnabled(preferences, false);
 
+        // Create webview with config
+        let configuration = WKWebViewConfiguration()
+        configuration.preferences = preferences
+        
         // Treat HTTP as HTTPS / secure
         let pool = WKProcessPool()
         let selector = NSSelectorFromString("_registerURLSchemeAsSecure:")
         pool.perform(selector, with: NSString(string: "http"))
-
-        // Create webview with config
-        let configuration = WKWebViewConfiguration()
-        configuration.preferences = preferences
+        configuration.processPool = pool
         
         // Remove autoplay restrictions on video/audio
         configuration.allowsInlineMediaPlayback = true
