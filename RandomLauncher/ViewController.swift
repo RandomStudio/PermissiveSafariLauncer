@@ -7,10 +7,15 @@ import WebKit
 // - Ensures windows is inspectable in Safari
 // - Automatically accept camera/media permissions requests, without dialog
 // - Allow video/audio to autoplay without interaction
+// - Hide status bar by default
 
 class ViewController: UIViewController, WKNavigationDelegate, WKUIDelegate {
     @IBOutlet weak var uiView: UIView!
     var webView: WKWebView!
+
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
